@@ -1,0 +1,6 @@
+# JS Files
+node_modules/
+coverage/
+
+# OS Specific
+.DS_Store
