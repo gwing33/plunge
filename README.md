@@ -1,5 +1,7 @@
 # Plunge
 
+**WORK IN PROGRESS: Lots to do before it's production ready.**
+
 Plunge is a Event Store, it keeps a high fidelity data on the application, enabling easy rollback.
 
 It could be considerd as a Flux Store, but it is more than that.
@@ -9,7 +11,7 @@ I guess this is my version of facebook's future Relay they keep talking about.
 
 ### Install
 ```bash
-npm install
+npm install plunge
 ```
 
 ### Usage
