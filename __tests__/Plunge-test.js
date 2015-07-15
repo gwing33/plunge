@@ -26,4 +26,13 @@ describe('Plunge Tests', () => {
 		expect(Plunge.get('asdf').isAnotherTest).toBe(true);
 		expect(_.size(Plunge.getEvents('asdf'))).toBe(3);
 	});
+
+	it('Lets do some nesting', () => {
+		var Plunge = require('../lib/Plunge');
+		var _ = require('lodash');
+
+		var obj = {};
+		Plunge.nestObj(obj, { foo: 'bar' }, 'some/great/uri'.split('/'));
+		expect(obj.some.great.uri.foo).toBe('bar');
+	});
 });
