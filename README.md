@@ -11,20 +11,53 @@ I guess this is my version of facebook's future Relay they keep talking about.
 
 ### Install
 ```bash
-npm install plunge
+npm install plunge --save
 ```
 
-### Usage
+### PROPOSED Usage
+
 ```javascript
 import Plunge from 'plunge';
 
+let id = 123;
+let bootstrapData = {};
 let Endpoint = {
   name: 'NSAPersonStore',
-  uri: '/personal/info'
+  uri: `/personal/${id}/info`,
+  data: bootstrapData
 };
 
 let store = Plunge.createContext( Endpoint );
+
+let params = {
+  includeSocial: true,
+  includeCreditCardNumbers: true,
+  includeFamilyHistory: false
+};
+
+store.fetch( params ); // Not Implimented
+
+store.add({
+  accountBeenHacked: true;
+});
+
+let postData = store.get();
+let queryString = {};
+
+store.save( postData, queryString ); // Not Implimented
+
+let rewindData = store.getRewindState(1); // Not Implimented
+// rewindData.accountBeenHacked == false;
+// postdata.accountBeenHacked == true;
+
+let diffData = store.getDiffState(1); // Not Implimented
+// diffData.current.accountBeenHacked = true;
+// diffData.prev.accountBeenHacked = false;
+
+// store.del(); // Not Implimented
+// store.create(); // Not Implimented
 ```
+
 
 
 ### Plunge Documentation
@@ -53,7 +86,13 @@ var endpoint = {
   uri: '/path/to/data',
   data: {
     // ... any data you want to initialize with.
-  }
+  },
+  listeners: [{ // Not Implimented
+    uri: '/path/to/related/data',
+    onChange: function(data) {
+      // Do Something
+    }
+  }]
 }
 ```
 
@@ -61,9 +100,14 @@ var endpoint = {
 - [x] Create a Singleton that Stores all the hifi data.
 - [x] Create a context or scope type class that wraps the singleton.
 - [x] Get sub-events if requested.
-- [ ] Create config documentation / standards. (In Progress)
-- [ ] Get, Save, Update & Delete Data
-- [ ] Data Validation
-- [ ] Trigger from other events
+- [x] Create config documentation / standards.
+- [ ] Get, Save, Update & Delete Data. (In Progress)
+- [ ] Trigger from other events, would like to modify addChangeListener to accept an array of data or a single function. (In Progress)
 - [ ] Local changes vs server value.
+- [ ] getUndoState
+- [ ] getDiffState
 - [ ] Create Example.
+
+## What About Validation?
+I think validation should be it's own declarative thing defined in the component.
+Plunge is not in the business of validating data correctness.
