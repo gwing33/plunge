@@ -15,19 +15,36 @@ npm install plunge
 ```
 
 ### Usage
-TODO
+```javascript
+import Plunge from 'plunge';
+
+let Endpoint = {
+  name: 'NSAPersonStore',
+  uri: '/personal/info'
+};
+
+let store = Plunge.createContext( Endpoint );
+```
 
 
 ### Plunge Documentation
- - ``createContext(Endpoint)``
- - ``createContexts([Endpoint])``
- - ``subscribe(function)``
- - ``add(uri:String, data:Object)``
- - ``get(uri:String, isExplicit:Bool)`` - isExplicit will return any matching uri's data scoped.
- - ``getEvents(uri:String)`` - Gets Events that match exactly the URI
- - ``getSubEvents(baseUri:String, uri:String)`` - Get Events that don't match exactly but contains the base URI
- - ``nestObj(baseObj:String, data:Object, uris:[String], i:Number = 0)`` - Creates a nested object based on uris
- - ``splitUri(baseUri:String, uri:String)`` - Strip out the baseUri from uri and split the rest into an array.
+Plunge functions as a singleton, and manages different "stores" for you.
+ - ``static createContext(Endpoint)``
+ - ``static createContexts([Endpoint])``
+ - ``static subscribe(function)``
+ - ``static add(uri:String, data:Object)``
+ - ``static get(uri:String, isExplicit:Bool)`` - isExplicit will return any matching uri's data scoped.
+ - ``static getEvents(uri:String)`` - Gets Events that match exactly the URI
+ - ``static getSubEvents(baseUri:String, uri:String)`` - Get Events that don't match exactly but contains the base URI
+ - ``static nestObj(baseObj:String, data:Object, uris:[String], i:Number = 0)`` - Creates a nested object based on uris
+ - ``static splitUri(baseUri:String, uri:String)`` - Strip out the baseUri from uri and split the rest into an array.
+
+### Plunge Context Documentation
+ - ``constructor(Endpoint)`` - Initializes Context, use Plunge.createContext instead.
+ - ``add(data:Object)`` - Pushes data into Plunge
+ - ``get()`` - Returns the Data for the context
+ - ``rebuild()`` - Will Rebuild data from Source
+ - ``addChangeListener(function)`` - Adds a listener to when data for this context has changed.
 
 ### Endpoint Configuration
 ```javascript
