@@ -29,10 +29,35 @@ describe('Plunge Tests', () => {
 
 	it('Lets do some nesting', () => {
 		var Plunge = require('../lib/Plunge');
-		var _ = require('lodash');
 
 		var obj = {};
 		Plunge.nestObj(obj, { foo: 'bar' }, 'some/great/uri'.split('/'));
 		expect(obj.some.great.uri.foo).toBe('bar');
+	});
+
+	it('Should make sure sub URI is formatted correctly', () => {
+		var Plunge = require('../lib/Plunge');
+
+		let uris = Plunge.splitUri('/some/uri/', '/some/uri/with/sub/string');
+		expect(uris.length).toBe(3);
+		expect(uris[0]).toBe('with');
+		expect(uris[1]).toBe('sub');
+		expect(uris[2]).toBe('string');
+	});
+
+	it('Lets test some Sub Events', () => {
+		var Plunge = require('../lib/Plunge');
+		var _ = require('lodash');
+		var json = require('./fixtures/events.json');
+
+		json.events.map(x => {
+			Plunge.add(x.uri, x.data);
+		});
+
+		var data = Plunge.get('/1');
+		expect(data.hello).toBe('world1');
+
+		data = Plunge.get('/1', true);
+		expect(data[2][3][4][5][6][7].hello).toBe('world7');
 	});
 });
