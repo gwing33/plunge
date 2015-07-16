@@ -82,13 +82,24 @@ Plunge functions as a singleton, and manages different "stores" for you.
  - ``get()`` - Returns the Data for the context
  - ``rebuild()`` - Will Rebuild data from Source
  - ``addChangeListener(function)`` - Adds a listener to when data for this context has changed.
+ - ``fetch( options )`` - Forwards to your api.fetch or api.get method, Returns Promise.
+ - ``save( options )`` - Forwards to your api.save or api.update method, Returns Promise.
+ - ``create( options )`` - Forwards to your api.create method, Returns Promise.
+ - ``del( options )`` - Forwards to your api.fetch or api.get method, Returns Promise.
 
 ### Endpoint Configuration
 ```javascript
 var endpoint = {
   name: 'StoreName',
   uri: '/path/to/data',
-  ApiHandler: API,
+  api: {
+    get: function () {},
+    fetch: function () {},
+    save: function () {},
+    update: function () {},
+    create: function () {},
+    del: function () {}
+  }
   data: {
     // ... any data you want to initialize with.
   },
