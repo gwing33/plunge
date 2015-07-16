@@ -123,7 +123,7 @@ Plunge is not in the business of validating data correctness.
 - [x] ~~Create a context or scope type class that wraps the singleton.~~
 - [x] ~~Get sub-events if requested.~~
 - [x] ~~Create config documentation / standards.~~
-- [ ] Get, Save, Update & Delete Data. (In Progress)
+- [x] ~~Get, Save, Update & Delete Data.~~
 - [ ] Trigger from other events, would like to modify addChangeListener to accept an array of data or a single function. (In Progress)
 - [ ] Local changes vs server value.
 - [ ] getUndoState

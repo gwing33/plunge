@@ -3,12 +3,13 @@ var jest = require('gulp-jest-iojs');
 var notify = require('gulp-notify');
 
 gulp.task('watch', ['jest'], function() {
-  gulp.watch(['**/*.js'], ['jest']);
+  gulp.watch(['lib/**/*.js', 'plugins/**/*.js'], ['jest']);
 });
 
 gulp.task('jest', function () {
-  return gulp.src('__tests__').pipe(jest({
-    scriptPreprocessor: "../node_modules/babel-jest",
+  return gulp.src('./').pipe(jest({
+    collectCoverage: true,
+    scriptPreprocessor: __dirname + "/node_modules/babel-jest",
     unmockedModulePathPatterns: [
       //"node_modules/react",
       "node_modules"
