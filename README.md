@@ -2,12 +2,12 @@
 
 **WORK IN PROGRESS: Lots to do before it's production ready.**
 
-Plunge is a Event Store, it keeps a high fidelity data on the application, enabling easy rollback.
+Plunge is a High Fidelity Event Store, enabling easy rollback.
 
-It could be considerd as a Flux Store, but it is more than that.
+It could be considered as a Flux Store, but it is more than that.
 It's probably more of an Store/Action combination.
 
-I guess this is my version of facebook's future Relay they keep talking about.
+This coupled with [react-plunge](https://github.com/gwing33/react-plunge) is my version of Facebook's Relay.
 
 ### Install
 ```bash
@@ -22,20 +22,19 @@ import { api } from './plugins/api';
 
 let id = 123;
 let bootstrapData = {};
-let Endpoint = {
+let Endpoint = api({
   name: 'NSAPersonStore',
   uri: `/personal/${id}/info`,
-  api: API, // Or create your own API interface
   data: bootstrapData
-};
+});
 
 let store = Plunge.createContext( Endpoint );
 
-let params = api({
+let params = {
   includeSocial: true,
   includeCreditCardNumbers: true,
   includeFamilyHistory: false
-});
+};
 
 store.fetch({ query: params }); // In Progress
 
@@ -112,6 +111,13 @@ var endpoint = {
 };
 ```
 
+### Plugins
+There is an api plugin to use out of the gate with Plunge. But you can create your own API plugin as you see fit.
+
+## What About Validation?
+I think validation should be it's own declarative thing defined in the component.
+Plunge is not in the business of validating data correctness.
+
 ## TODO
 - [x] ~~Create a Singleton that Stores all the hifi data.~~
 - [x] ~~Create a context or scope type class that wraps the singleton.~~
@@ -123,7 +129,3 @@ var endpoint = {
 - [ ] getUndoState
 - [ ] getDiffState
 - [ ] Create Example.
-
-## What About Validation?
-I think validation should be it's own declarative thing defined in the component.
-Plunge is not in the business of validating data correctness.
