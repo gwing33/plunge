@@ -18,7 +18,7 @@ npm install plunge --save
 
 ```javascript
 import Plunge from 'plunge';
-import api from './plugins/api';
+import { api } from './plugins/api';
 
 let id = 123;
 let bootstrapData = {};

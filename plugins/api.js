@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import superagent from 'superagent';
 
-let api = (options) => {
+export function api(options) {
   if(!options.uri) {
     return false;
   }
@@ -56,6 +56,4 @@ let api = (options) => {
   });
 
   return true;
-};
-
-export default api;
+}
