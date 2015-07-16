@@ -37,7 +37,7 @@ let params = api({
   includeFamilyHistory: false
 });
 
-store.fetch({ query: params }); // Not Implimented
+store.fetch({ query: params }); // In Progress
 
 store.add({
   accountBeenHacked: true;
@@ -46,7 +46,7 @@ store.add({
 let postData = store.get();
 let queryString = {};
 
-store.save({ // Not Implimented
+store.save({ // In Progress
   data: postData,
   query: queryString
 });
@@ -59,22 +59,22 @@ let diffData = store.getDiffState(1); // Not Implimented
 // diffData.current.accountBeenHacked = true;
 // diffData.prev.accountBeenHacked = false;
 
-// store.del( options ); // Not Implimented
-// store.create( options ); // Not Implimented
+// store.del( options ); // In Progress
+// store.create( options ); // In Progress
 ```
 
 
 ### Plunge Documentation
 Plunge functions as a singleton, and manages different "stores" for you.
- - ``static createContext(Endpoint)``
- - ``static createContexts([Endpoint])``
- - ``static subscribe(function)``
- - ``static add(uri:String, data:Object)``
- - ``static get(uri:String, isExplicit:Bool)`` - isExplicit will return any matching uri's data scoped.
- - ``static getEvents( String )`` - Gets Events that match exactly the URI
- - ``static getSubEvents(baseUri:String, uri:String)`` - Get Events that don't match exactly but contains the base URI
- - ``static nestObj(baseObj:String, data:Object, uris:[String], i:Number = 0)`` - Creates a nested object based on uris
- - ``static splitUri(baseUri:String, uri:String)`` - Strip out the baseUri from uri and split the rest into an array.
+ - ``static createContext( Endpoint ) : PlungeContext``
+ - ``static createContexts( [Endpoint] ) : [PlungeContext]``
+ - ``static subscribe( function )``
+ - ``static add( uri:String, data:Object )``
+ - ``static get( uri:String, isExplicit:Bool ) : Object`` - isExplicit will return any matching uri's data scoped.
+ - ``static getEvents( String ) : [Object]`` - Gets Events that match exactly the URI
+ - ``static getSubEvents( baseUri:String, uri:String ) : [Object]`` - Get Events that don't match exactly but contains the base URI
+ - ``static nestObj( baseObj:String, data:Object, uris:[String], i:Number = 0 ) : Object`` - Creates a nested object based on uris
+ - ``static splitUri( baseUri:String, uri:String ) : [String]`` - Strip out the baseUri from uri and split the rest into an array.
 
 ### Plunge Context Documentation
  - ``constructor( Endpoint )`` - Initializes Context, use Plunge.createContext instead.
