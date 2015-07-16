@@ -71,21 +71,21 @@ Plunge functions as a singleton, and manages different "stores" for you.
  - ``static subscribe(function)``
  - ``static add(uri:String, data:Object)``
  - ``static get(uri:String, isExplicit:Bool)`` - isExplicit will return any matching uri's data scoped.
- - ``static getEvents(uri:String)`` - Gets Events that match exactly the URI
+ - ``static getEvents( String )`` - Gets Events that match exactly the URI
  - ``static getSubEvents(baseUri:String, uri:String)`` - Get Events that don't match exactly but contains the base URI
  - ``static nestObj(baseObj:String, data:Object, uris:[String], i:Number = 0)`` - Creates a nested object based on uris
  - ``static splitUri(baseUri:String, uri:String)`` - Strip out the baseUri from uri and split the rest into an array.
 
 ### Plunge Context Documentation
- - ``constructor(Endpoint)`` - Initializes Context, use Plunge.createContext instead.
- - ``add(data:Object)`` - Pushes data into Plunge
- - ``get()`` - Returns the Data for the context
- - ``rebuild()`` - Will Rebuild data from Source
- - ``addChangeListener(function)`` - Adds a listener to when data for this context has changed.
- - ``fetch( options )`` - Forwards to your api.fetch or api.get method, Returns Promise.
- - ``save( options )`` - Forwards to your api.save or api.update method, Returns Promise.
- - ``create( options )`` - Forwards to your api.create method, Returns Promise.
- - ``del( options )`` - Forwards to your api.fetch or api.get method, Returns Promise.
+ - ``constructor( Endpoint )`` - Initializes Context, use Plunge.createContext instead.
+ - ``add( data:Object )`` - Pushes data into Plunge
+ - ``get() : Object`` - Returns the Data for the context
+ - ``rebuild() : Object`` - Will Rebuild data from Source
+ - ``addChangeListener( function )`` - Adds a listener to when data for this context has changed.
+ - ``fetch( options ) : Promise`` - Forwards to your api.fetch or api.get method,
+ - ``save( options ) : Promise`` - Forwards to your api.save or api.update method.
+ - ``create( options ) : Promise`` - Forwards to your api.create method.
+ - ``del( options ) : Promise`` - Forwards to your api.fetch or api.get method.
 
 ### Endpoint Configuration
 ```javascript
