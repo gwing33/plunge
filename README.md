@@ -18,24 +18,26 @@ npm install plunge --save
 
 ```javascript
 import Plunge from 'plunge';
+import api from './plugins/api';
 
 let id = 123;
 let bootstrapData = {};
 let Endpoint = {
   name: 'NSAPersonStore',
   uri: `/personal/${id}/info`,
+  api: API, // Or create your own API interface
   data: bootstrapData
 };
 
 let store = Plunge.createContext( Endpoint );
 
-let params = {
+let params = api({
   includeSocial: true,
   includeCreditCardNumbers: true,
   includeFamilyHistory: false
-};
+});
 
-store.fetch( params ); // Not Implimented
+store.fetch({ query: params }); // Not Implimented
 
 store.add({
   accountBeenHacked: true;
@@ -44,20 +46,22 @@ store.add({
 let postData = store.get();
 let queryString = {};
 
-store.save( postData, queryString ); // Not Implimented
+store.save({ // Not Implimented
+  data: postData,
+  query: queryString
+});
 
 let rewindData = store.getRewindState(1); // Not Implimented
 // rewindData.accountBeenHacked == false;
-// postdata.accountBeenHacked == true;
+// postData.accountBeenHacked == true;
 
 let diffData = store.getDiffState(1); // Not Implimented
 // diffData.current.accountBeenHacked = true;
 // diffData.prev.accountBeenHacked = false;
 
-// store.del(); // Not Implimented
-// store.create(); // Not Implimented
+// store.del( options ); // Not Implimented
+// store.create( options ); // Not Implimented
 ```
-
 
 
 ### Plunge Documentation
@@ -84,6 +88,7 @@ Plunge functions as a singleton, and manages different "stores" for you.
 var endpoint = {
   name: 'StoreName',
   uri: '/path/to/data',
+  ApiHandler: API,
   data: {
     // ... any data you want to initialize with.
   },
@@ -93,7 +98,7 @@ var endpoint = {
       // Do Something
     }
   }]
-}
+};
 ```
 
 ## TODO

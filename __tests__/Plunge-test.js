@@ -59,5 +59,7 @@ describe('Plunge Tests', () => {
 
 		data = Plunge.get('/1', true);
 		expect(data[2][3][4][5][6][7].hello).toBe('world7');
+
+		expect(true).toBe(false);
 	});
 });
