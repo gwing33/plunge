@@ -4,14 +4,14 @@ import superagent from 'superagent';
 
 export function api(options) {
   if(!options.uri) {
-    return false;
+    return options;
   }
 
   if(!options.api) {
     options.api = {};
   }
 
-  _.merge(options.api, {
+  return _.merge(options.api, {
     get: (apiOptions = {}) => {
       return new Promise((resolve, reject) => {
         superagent.get(options.uri)
@@ -54,6 +54,4 @@ export function api(options) {
       });
     }
   });
-
-  return true;
 }
