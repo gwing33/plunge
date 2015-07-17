@@ -102,11 +102,13 @@ var endpoint = {
   data: {
     // ... any data you want to initialize with.
   },
-  listeners: [{ // Not Implimented
-    uri: '/path/to/related/data',
-    onChange: function(data) {
+  listeners: [{ // Pass an object...
+    uri: 'string',
+    onChange: (prevData, data) => {
       // Do Something
     }
+  }, (prevData, data) => { // Or just a function. This will bind it to your uri path.
+    // Do Something
   }]
 };
 ```
@@ -124,7 +126,7 @@ Plunge is not in the business of validating data correctness.
 - [x] ~~Get sub-events if requested.~~
 - [x] ~~Create config documentation / standards.~~
 - [x] ~~Get, Save, Update & Delete Data.~~
-- [ ] Trigger from other events, would like to modify addChangeListener to accept an array of data or a single function. (In Progress)
+- [x] ~~Trigger from other events, would like to modify addChangeListener to accept an array of data or a single function.~~
 - [ ] Local changes vs server value.
 - [ ] getUndoState
 - [ ] getDiffState
