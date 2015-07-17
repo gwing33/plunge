@@ -141,6 +141,7 @@ Plunge is not in the business of validating data correctness.
 - [x] ~~Create config documentation / standards.~~
 - [x] ~~Get, Fetch, Save, Update, Create & Delete Data.~~
 - [x] ~~Trigger from other events, would like to modify addChangeListener to accept an array of data or a single function.~~
-- [ ] Write tests around api plugin and api PlungeContext actions.
+- [ ] Write tests around api plugin and api PlungeContext actions. (In Progress)
 - [ ] Create way to extend the library to fetch specific kinds of data (getDiffState, getPrevStateFromServer).
+- [ ] SubEventState - Right now Getting sub events has no connection to the offset that gets passed in.
 - [ ] Create Example.
