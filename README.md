@@ -62,7 +62,7 @@ let rewindData = store.getState(1); // Gets Previous State
 // rewindData.accountBeenHacked == false;
 // postData.accountBeenHacked == true;
 
-let diffData = store.getDiffState(1); // Not Implimented
+let diffData = store.getDiffState(1); // Not Implemented
 // diffData.current.accountBeenHacked = true;
 // diffData.prev.accountBeenHacked = false;
 
@@ -91,6 +91,7 @@ Plunge functions as a singleton, and manages different "stores" for you.
  - ``getStore(offset = 0) : Object`` - Returns the Data for the context
  - ``getPrevStore() : Object`` - Returns the Previous Data for the context
  - ``rebuild() : Object`` - Will Rebuild data from Source
+ - ``rebuildPrev() : Object`` - Will Rebuild data from Source
  - ``addChangeListener( function )`` - Adds a listener to when data for this context has changed.
  - ``get( options ) : Promise`` - Forwards to your api.fetch or api.get method,
  - ``fetch( options ) : Promise`` - Forwards to your api.fetch or api.get method,
