@@ -1,5 +1,9 @@
-# Plunge
-
+```
+,____ _   _   _ __   _   ___  _____,
+| .  | | | | | |  \ | |/  __|| ____|
+|  __| |_| |_| |   \| |  |_--| _|__
+|_|  |___|_____|_|\___|\_____|_____|
+```
 **WORK IN PROGRESS: Lots to do before it's production ready.**
 
 Plunge is a High Fidelity Event Store, enabling easy rollback.
@@ -141,7 +145,7 @@ Plunge is not in the business of validating data correctness.
 - [x] ~~Create config documentation / standards.~~
 - [x] ~~Get, Fetch, Save, Update, Create & Delete Data.~~
 - [x] ~~Trigger from other events, would like to modify addChangeListener to accept an array of data or a single function.~~
-- [ ] Write tests around api plugin and api PlungeContext actions. (In Progress)
-- [ ] Create way to extend the library to fetch specific kinds of data (getDiffState, getPrevStateFromServer).
-- [ ] SubEventState - Right now Getting sub events has no connection to the offset that gets passed in.
+- [ ] Bring in Baobab as global store. (In Progres)
+- [ ] Use RxJS as the transformation layer into the store. (In Progres)
+- [ ] Write new spec for how Plunge is to work.
 - [ ] Create Example.
