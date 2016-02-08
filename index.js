@@ -1,3 +1,2 @@
-require('babel/register');
-
-module.exports = require('./lib/Plunge');
+require('babel-register');
+require('./src/index');
