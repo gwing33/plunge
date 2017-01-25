@@ -1,3 +1,5 @@
-require('babel/register');
+import {Observable} from "rx";
 
-module.exports = require('./lib/Plunge');
+Observable.just(1).subscribe(() => {
+    console.log("Hello");
+});
