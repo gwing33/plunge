@@ -1,6 +1,7 @@
 # JS Files
 node_modules/
 coverage/
+lib/
 
 # OS Specific
 .DS_Store
