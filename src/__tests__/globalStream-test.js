@@ -1,44 +1,31 @@
-jest.autoMockOff();
-
-import {TestScheduler, ReactiveTest} from "rx";
-
-const {globalStream} = require("../globalStream");
-
-// Aliases
-const {onNext, onCompleted} = ReactiveTest;
+import {TestScheduler} from 'rxjs';
 
 describe('Global Stream Tests', () => {
-  it('Should send a message through the main pipeline', () => {
-    const stream = globalStream.getStream();
-
-    stream.subscribe((message) => {
-      expect(message.topic).toBe('hello');
+  it('Should send a message without data', () => {
+    const rxTestScheduler = new TestScheduler((actual, expected) => {
+      expect(actual).toEqual(expected);
     });
 
-    globalStream.doDispatch({topic: 'hello'});
-  });
+    const {globalStream} = require('../globalStream');
 
-  it('Should testing manual dispatches of messages and specific types.', () => {
-    const scheduler = new TestScheduler();
-    globalStream.init(scheduler);
+    const main        = '--a--b--c--|';
+    const subscriber1 = '(a|)        ';
+    const expected1   = '-----b-----|';
+    const mainVals = {
+      a: {foo: "bar"},
+      b: {action: "world"},
+      c: {bar: "foo"}
+    };
 
-    scheduler.scheduleAbsolute({}, 300, () => {
-      globalStream.doDispatch({topic: 'hello'});
-      globalStream.doDispatch({topic: 'helloToo'});
-    });
+    const sub1 = rxTestScheduler.createHotObservable(subscriber1).mergeMapTo(globalStream);
+    const result = rxTestScheduler.createHotObservable(main, mainVals).do(
+      x => globalStream.next(x), e => globalStream.error(e), () => globalStream.complete()
+    );
 
-    scheduler.scheduleAbsolute({}, 500, () => {
-      globalStream.doDispatch({topic: 'hello'});
-    });
+    rxTestScheduler.expectObservable(result).toBe(main, mainVals);
+    rxTestScheduler.expectObservable(sub1).toBe(expected1, {b: {action: "world", data: {}}});
 
-    const results = scheduler.startScheduler(() => {
-      return globalStream.getStream();
-    });
-
-    expect (results.messages).toEqual([
-        onNext(301, {topic: 'hello'}),
-        onNext(302, {topic: 'helloToo'}),
-        onNext(501, {topic: 'hello'})
-    ]);
+    // Flush the tests which will run the deep compare
+    rxTestScheduler.flush();
   });
 });
