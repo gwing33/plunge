@@ -8,22 +8,28 @@ describe('Global Stream Tests', () => {
 
     const {globalStream} = require('../globalStream');
 
-    const main        = '--a--b--c--|';
-    const subscriber1 = '(a|)        ';
-    const expected1   = '-----b-----|';
+    const main     = '--a--b--c--|';
+    const expected = '-----b-----|';
+
     const mainVals = {
       a: {foo: "bar"},
       b: {action: "world"},
       c: {bar: "foo"}
     };
+    const expectedVals = {
+      b: {action: "world", data: {}}
+    };
 
-    const sub1 = rxTestScheduler.createHotObservable(subscriber1).mergeMapTo(globalStream);
+    // Subscribe to the global stream to start listening for values.
+    rxTestScheduler.expectObservable(globalStream).toBe(expected, expectedVals);
+
+    // Redirect the values into the globalStream
     const result = rxTestScheduler.createHotObservable(main, mainVals).do(
       x => globalStream.next(x), e => globalStream.error(e), () => globalStream.complete()
     );
 
+    // Add test data to be able to be flushed, which will flow the data to the globalStream.
     rxTestScheduler.expectObservable(result).toBe(main, mainVals);
-    rxTestScheduler.expectObservable(sub1).toBe(expected1, {b: {action: "world", data: {}}});
 
     // Flush the tests which will run the deep compare
     rxTestScheduler.flush();
