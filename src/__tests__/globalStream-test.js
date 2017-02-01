@@ -20,25 +20,25 @@ describe('Global Stream Tests', () => {
     const main     = '--a--b--c--|';
     const expected = '-----b-----|';
 
-    const mainVals = {
+    const mockData = {
       a: {foo: "bar"},
       b: {action: "world"},
       c: {bar: "foo"}
     };
-    const expectedVals = {
+    const expectedData = {
       b: {action: "world", data: {}}
     };
 
     // Subscribe to the GS to start listening for values.
-    rxTestScheduler.expectObservable(globalStream).toBe(expected, expectedVals);
+    rxTestScheduler.expectObservable(globalStream).toBe(expected, expectedData);
 
     // TestObservable that redirects data to the GS
-    const result = rxTestScheduler.createHotObservable(main, mainVals).do(
+    const result = rxTestScheduler.createHotObservable(main, mockData).do(
       x => globalStream.next(x), e => globalStream.error(e), () => globalStream.complete()
     );
 
     // Add TestObservable to the flush queue.
-    rxTestScheduler.expectObservable(result).toBe(main, mainVals);
+    rxTestScheduler.expectObservable(result).toBe(main, mockData);
 
     // Flush the tests which will run the deep compare
     rxTestScheduler.flush();
