@@ -5,16 +5,13 @@
  * * */
 
 import { ReplaySubject } from 'rxjs';
+import { List, Map } from 'immutable';
 
 const _globalStream = new ReplaySubject(1);
 
 export const globalStream = _globalStream
+  // Immutable or bust.
+  .filter(payload => Map.isMap(payload))
   // Everything should have an action
-  .filter(payload => !!payload.action)
-  // Make sure data exists, but not required
-  .map(payload => {
-      return {
-          action: payload.action,
-          data: payload.data || {}
-      };
-  });
+  .filter(payload => !!payload.get('action'))
+  .do(console.log);

@@ -1,4 +1,5 @@
 import {TestScheduler} from 'rxjs';
+import {Map} from 'immutable';
 
 const {globalStream} = require('../globalStream');
 const rxTestScheduler = new TestScheduler((actual, expected) => {
@@ -21,12 +22,14 @@ describe('Global Stream Tests', () => {
     const expected = '-----b-----|';
 
     const mockData = {
-      a: {foo: "bar"},
-      b: {action: "world"},
-      c: {bar: "foo"}
+      a: Map({foo: "bar"}),
+      b: Map({action: "world"}),
+      c: Map({bar: "foo"})
     };
     const expectedData = {
-      b: {action: "world", data: {}}
+      b: Map({
+        action: "world"
+      })
     };
 
     // Subscribe to the GS to start listening for values.
@@ -39,6 +42,7 @@ describe('Global Stream Tests', () => {
 
     // Add TestObservable to the flush queue.
     rxTestScheduler.expectObservable(result).toBe(main, mockData);
+
 
     // Flush the tests which will run the deep compare
     rxTestScheduler.flush();
